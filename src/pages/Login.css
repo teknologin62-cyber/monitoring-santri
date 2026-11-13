@@ -1,0 +1,428 @@
+/* ═══════════════════════════════════════════
+   LOGIN PAGE
+   Mobile-first · design token dari tokens.css
+═══════════════════════════════════════════ */
+
+/* ── Root wrapper ── */
+.login-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background); /* #EFFFF1 */
+  padding: var(--space-6) var(--space-4) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════
+   DEKORASI LINGKARAN BACKGROUND
+══════════════════════════════ */
+.login-bg-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.login-bg-deco__circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.login-bg-deco__circle--tl {
+  width: 480px;
+  height: 480px;
+  background: var(--color-primary);
+  opacity: 0.06;
+  top: -180px;
+  right: -140px;
+}
+
+.login-bg-deco__circle--br {
+  width: 340px;
+  height: 340px;
+  background: var(--color-mint);
+  opacity: 0.15;
+  bottom: 100px;   /* di atas wave */
+  left: -100px;
+}
+
+/* ══════════════════════════════
+   KARTU LOGIN
+══════════════════════════════ */
+.login-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(6, 78, 59, 0.10);
+  padding: 32px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  /* sedikit naik agar tidak terlalu mepet wave */
+  margin-bottom: 24px;
+}
+
+/* ── Header kartu ── */
+.login-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.login-card__logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  margin-bottom: var(--space-1);
+}
+
+.login-card__app-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.login-card__app-tagline {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--space-3);
+}
+
+.login-card__title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.login-card__subtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ══════════════════════════════
+   BANNER NOTIFIKASI
+══════════════════════════════ */
+.login-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.login-banner--error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+}
+
+.login-banner--success {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.login-banner__icon {
+  flex-shrink: 0;
+  font-style: normal;
+  margin-top: 1px;
+}
+
+/* ══════════════════════════════
+   FORM
+══════════════════════════════ */
+.login-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ── Password wrap + toggle ── */
+.login-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-pw-wrap input {
+  width: 100%;
+  height: 52px;
+  padding: 0 48px 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  outline: none;
+  font: inherit;
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.login-pw-wrap input:focus {
+  border-color: var(--color-primary-button);
+}
+
+.login-pw-toggle {
+  position: absolute;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s;
+}
+
+.login-pw-toggle:hover {
+  color: var(--color-primary);
+}
+
+/* ── Baris: Ingat Saya + Lupa Password ── */
+.login-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  margin-top: calc(var(--space-1) * -1);
+}
+
+.login-remember {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--color-text);
+  cursor: pointer;
+  user-select: none;
+}
+
+.login-remember input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-primary-button);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.login-forgot-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.login-forgot-btn:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+.login-forgot-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Tombol utama: flex agar ikon + teks sejajar ── */
+.login-form .primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* ── Spinner loading ── */
+.login-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: login-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+.login-spinner--dark {
+  border: 2px solid rgba(6, 78, 59, 0.2);
+  border-top-color: var(--color-primary);
+}
+
+@keyframes login-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════
+   PEMISAH "atau"
+══════════════════════════════ */
+.login-divider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.login-divider span {
+  flex: 1;
+  height: 1px;
+  background: var(--color-border);
+}
+
+.login-divider p {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  margin: 0;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ══════════════════════════════
+   TOMBOL GOOGLE
+══════════════════════════════ */
+.login-google-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3);
+  width: 100%;
+  height: 52px;
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, box-shadow 0.15s;
+}
+
+.login-google-btn:hover:not(:disabled) {
+  background: #F9FAFB;
+  border-color: #9CA3AF;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.login-google-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.login-google-btn__icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* ── Footer kartu ── */
+.login-card__footer {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+.login-card__link {
+  color: var(--color-primary-button);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.login-card__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════
+   GELOMBANG BAWAH
+══════════════════════════════ */
+.login-wave {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  /* tarik ke bawah agar wave menyatu dengan tepi viewport */
+  margin-top: auto;
+  line-height: 0;
+  /* pastikan wave selalu di bawah halaman */
+  align-self: flex-end;
+}
+
+.login-wave svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: 70px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+══════════════════════════════ */
+@media (min-width: 600px) {
+  .login-root {
+    padding: var(--space-8) var(--space-6) 0;
+  }
+
+  .login-card {
+    padding: 40px 40px 32px;
+    max-width: 460px;
+  }
+
+  .login-card__logo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .login-card__title {
+    font-size: 24px;
+  }
+
+  .login-wave svg {
+    min-height: 90px;
+  }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — DESKTOP (≥ 1024px)
+══════════════════════════════ */
+@media (min-width: 1024px) {
+  .login-card {
+    padding: 48px 48px 36px;
+  }
+
+  .login-card__title {
+    font-size: 26px;
+  }
+
+  .login-wave svg {
+    min-height: 110px;
+  }
+}

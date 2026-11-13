@@ -1,0 +1,281 @@
+/* ═══════════════════════════════════════════
+   WELCOME PAGE
+   Mobile-first, lalu tablet & desktop
+   Menggunakan design token dari tokens.css
+═══════════════════════════════════════════ */
+
+/* ── Root container ── */
+.welcome-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* warna background = hijau tua, tampil di bawah hero kalau ada gap */
+  background: var(--color-primary);
+  overflow: hidden;
+}
+
+/* ══════════════════════════════
+   HERO
+══════════════════════════════ */
+.welcome-hero {
+  position: relative;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* overflow hidden agar wave tidak keluar batas hero */
+  overflow: hidden;
+  min-height: 100svh;
+}
+
+/* Background foto */
+.welcome-hero__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Overlay gelap agar teks terbaca */
+.welcome-hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(6, 78, 59, 0.72) 0%,
+    rgba(6, 78, 59, 0.60) 50%,
+    rgba(6, 78, 59, 0.85) 100%
+  );
+}
+
+/* Content di atas overlay */
+.welcome-hero__content {
+  position: relative;
+  z-index: 2;                   /* lebih tinggi dari wave (z-index 1) */
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+  /* padding bawah ekstra: konten tidak tertutupi wave ~130px */
+  padding: 60px 24px 160px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--space-5);
+}
+
+/* ══════════════════════════════
+   BRAND (logo + nama)
+══════════════════════════════ */
+.welcome-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  background: rgba(255, 255, 255, 0.10);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--radius-full);
+  padding: 10px 20px 10px 10px;
+}
+
+.welcome-brand__logo {
+  width: 64px;        /* diperbesar dari 48px */
+  height: 64px;
+  object-fit: contain;
+  border-radius: var(--radius-sm);
+  flex-shrink: 0;
+}
+
+.welcome-brand__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+.welcome-brand__name {
+  color: var(--color-text-white);
+  font-weight: 800;
+  font-size: 15px;
+  line-height: 1.2;
+}
+
+.welcome-brand__tagline {
+  color: var(--color-mint-light);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+/* ══════════════════════════════
+   JUDUL & DESKRIPSI
+══════════════════════════════ */
+.welcome-title {
+  color: var(--color-text-white);
+  font-size: clamp(26px, 6vw, 44px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.5px;
+  margin: 0;
+}
+
+.welcome-desc {
+  color: rgba(255, 255, 255, 0.88);
+  font-size: clamp(14px, 2.5vw, 17px);
+  line-height: 1.75;
+  max-width: 480px;
+  margin: 0;
+}
+
+/* ══════════════════════════════
+   TOMBOL CTA
+══════════════════════════════ */
+.welcome-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 14px 32px;
+  background: var(--color-primary-button);
+  color: var(--color-text-white);
+  border: none;
+  border-radius: var(--radius-full);
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(6, 78, 59, 0.45);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  text-decoration: none;
+  margin-top: var(--space-2);
+}
+
+.welcome-cta:hover {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(6, 78, 59, 0.55);
+}
+
+.welcome-cta:active {
+  transform: translateY(0);
+}
+
+.welcome-cta__icon {
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.welcome-cta:hover .welcome-cta__icon {
+  transform: translateX(4px);
+}
+
+/* ══════════════════════════════
+   WAVE — di dalam hero, menempel di bawah
+══════════════════════════════ */
+.welcome-hero__wave {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;           /* di atas overlay, di bawah content */
+  line-height: 0;
+  pointer-events: none;
+}
+
+.welcome-hero__wave svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  /* tinggi wave: 90px mobile, lebar lebih besar di desktop */
+  min-height: 90px;
+}
+
+/* ══════════════════════════════
+   SLOGAN
+══════════════════════════════ */
+.welcome-slogan {
+  color: var(--color-mint-light);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  margin: 0;
+  opacity: 0.85;
+}
+
+/* ══════════════════════════════
+   FOOTER STRIP — di bawah hero, lanjutan hijau tua
+══════════════════════════════ */
+.welcome-footer {
+  background: var(--color-primary);
+  color: rgba(255, 255, 255, 0.50);
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  text-align: center;
+  padding: 14px 24px 18px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+══════════════════════════════ */
+@media (min-width: 600px) {
+  .welcome-brand__logo {
+    width: 72px;
+    height: 72px;
+  }
+
+  .welcome-brand__name {
+    font-size: 17px;
+  }
+
+  .welcome-brand__tagline {
+    font-size: 12px;
+  }
+
+  .welcome-hero__content {
+    padding: 80px 40px 180px;
+    gap: var(--space-6);
+  }
+
+  .welcome-hero__wave svg {
+    min-height: 110px;
+  }
+
+  .welcome-cta {
+    padding: 16px 40px;
+    font-size: 17px;
+  }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — DESKTOP (≥ 1024px)
+══════════════════════════════ */
+@media (min-width: 1024px) {
+  .welcome-hero__content {
+    padding: 100px 40px 200px;
+    gap: 28px;
+  }
+
+  .welcome-brand__logo {
+    width: 80px;
+    height: 80px;
+  }
+
+  .welcome-brand__name {
+    font-size: 18px;
+  }
+
+  .welcome-title {
+    font-size: 48px;
+  }
+
+  .welcome-desc {
+    font-size: 18px;
+  }
+
+  .welcome-hero__wave svg {
+    min-height: 130px;
+  }
+}
