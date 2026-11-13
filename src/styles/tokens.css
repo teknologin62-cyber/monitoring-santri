@@ -1,0 +1,45 @@
+
+:root {
+  /* BRAND COLORS */
+  --color-primary: #064E3B;
+  --color-primary-button: #08734B;
+  --color-primary-hover: #055C3D;
+
+  /* BACKGROUND COLORS */
+  --color-background: #EFFFF1;
+  --color-surface: #FFFFFF;
+  --color-input: #F5F8F7;
+
+  /* ACCENT COLORS */
+  --color-mint: #78DCC0;
+  --color-mint-light: #B9F0A5;
+
+  /* TEXT COLORS */
+  --color-text: #334B40;
+  --color-text-muted: #7B8982;
+  --color-text-white: #FFFFFF;
+
+  /* BORDER */
+  --color-border: #D8E4DD;
+
+  /* FONT */
+  --font-primary: "Plus Jakarta Sans", sans-serif;
+
+  /* BORDER RADIUS */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-full: 999px;
+
+  /* SPACING */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+
+  /* SHADOW */
+  --shadow-card: 0 4px 20px rgba(6, 78, 59, 0.08);
+}
