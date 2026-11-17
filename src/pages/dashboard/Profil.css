@@ -1,0 +1,158 @@
+/* ═══════════════════
+   PROFIL
+═══════════════════ */
+.profil-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+.profil-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+/* ── Kartu identitas ── */
+.profil-card {
+  background: linear-gradient(135deg, #064E3B 0%, #08734B 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  align-items: center;
+  gap: var(--space-5);
+}
+
+.profil-card__avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.18);
+  border: 2.5px solid rgba(255,255,255,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #FFFFFF;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.profil-card__info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profil-card__name {
+  font-size: 18px;
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profil-card__role-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.80);
+  background: rgba(255,255,255,0.14);
+  border-radius: var(--radius-full);
+  padding: 3px 10px;
+  letter-spacing: 0.5px;
+}
+
+/* ── Kartu detail ── */
+.profil-detail {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-2) var(--space-5);
+}
+
+.profil-detail__row {
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-4) 0;
+}
+
+.profil-detail__divider {
+  height: 1px;
+  background: var(--color-border);
+  margin: 0;
+}
+
+.profil-detail__icon {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: var(--color-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary-button);
+  flex-shrink: 0;
+}
+
+.profil-detail__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 2px;
+}
+
+.profil-detail__value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  word-break: break-all;
+}
+
+/* ── Placeholder ── */
+.profil-placeholder {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-4);
+  text-align: center;
+  font-size: 14px;
+  color: var(--color-text-muted);
+}
+
+/* ── Tombol logout ── */
+.profil-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: 52px;
+  background: none;
+  border: 1.5px solid #FECACA;
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  color: #DC2626;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.profil-logout-btn:hover:not(:disabled) {
+  background: #FEF2F2;
+}
+
+.profil-logout-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}

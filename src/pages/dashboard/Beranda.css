@@ -1,0 +1,218 @@
+/* ═══════════════════════════════════════════
+   BERANDA — tab utama dashboard
+═══════════════════════════════════════════ */
+
+.beranda-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+/* ══════════════════════════════
+   BANNER SAPAAN
+══════════════════════════════ */
+.beranda-banner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  background: linear-gradient(135deg, #064E3B 0%, #08734B 100%);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  overflow: hidden;
+  position: relative;
+}
+
+.beranda-banner__text {
+  flex: 1;
+  min-width: 0;
+}
+
+.beranda-banner__title {
+  font-size: clamp(18px, 4vw, 22px);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin: 0 0 4px;
+  line-height: 1.3;
+}
+
+.beranda-banner__role {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.12);
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+  margin-bottom: var(--space-2);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.beranda-banner__sub {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.78);
+  line-height: 1.55;
+  margin: 0;
+}
+
+.beranda-banner__logo {
+  width: 72px;
+  height: 72px;
+  object-fit: contain;
+  opacity: 0.18;
+  flex-shrink: 0;
+  /* Efek dekorasi — logo blur besar di sudut kanan */
+  filter: brightness(10);
+}
+
+/* ══════════════════════════════
+   JUDUL SECTION
+══════════════════════════════ */
+.beranda-section-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0 0 var(--space-3);
+}
+
+/* ══════════════════════════════
+   KARTU STATISTIK
+══════════════════════════════ */
+.beranda-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.beranda-stat-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4);
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.beranda-stat-card__icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.beranda-stat-card__icon--blue   { background: #EFF6FF; color: #3B82F6; }
+.beranda-stat-card__icon--green  { background: #F0FDF4; color: #10B981; }
+.beranda-stat-card__icon--amber  { background: #FFFBEB; color: #F59E0B; }
+.beranda-stat-card__icon--purple { background: #F5F3FF; color: #8B5CF6; }
+
+.beranda-stat-card__value {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 2px;
+  line-height: 1;
+}
+
+.beranda-stat-card__label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* ══════════════════════════════
+   MENU AKSI CEPAT
+══════════════════════════════ */
+.beranda-menu-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-3);
+}
+
+.beranda-menu-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  border: none;
+  padding: var(--space-5) var(--space-4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-3);
+  cursor: pointer;
+  transition: transform 0.15s, box-shadow 0.15s;
+  position: relative;
+  text-align: center;
+}
+
+.beranda-menu-card:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(6, 78, 59, 0.12);
+}
+
+.beranda-menu-card:disabled {
+  cursor: default;
+  opacity: 0.75;
+}
+
+.beranda-menu-card__icon {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.beranda-menu-card__icon--green  { background: #ECFDF5; color: #059669; }
+.beranda-menu-card__icon--blue   { background: #EFF6FF; color: #3B82F6; }
+.beranda-menu-card__icon--amber  { background: #FFFBEB; color: #D97706; }
+.beranda-menu-card__icon--purple { background: #F5F3FF; color: #7C3AED; }
+
+.beranda-menu-card__label {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  line-height: 1.4;
+}
+
+/* Badge "Segera" */
+.beranda-menu-card__badge {
+  position: absolute;
+  top: var(--space-2);
+  right: var(--space-2);
+  font-size: 9px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  background: var(--color-background);
+  border-radius: var(--radius-full);
+  padding: 2px 7px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE
+══════════════════════════════ */
+@media (min-width: 480px) {
+  .beranda-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 640px) {
+  .beranda-stats-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .beranda-menu-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}

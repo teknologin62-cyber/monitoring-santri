@@ -14,6 +14,8 @@ import "./App.css";
  *  /login       → Login            (publik, redirect ke /dashboard jika sudah login)
  *  /register    → Register         (publik, redirect ke /dashboard jika sudah login)
  *  /dashboard   → Dashboard        (privat — dilindungi ProtectedRoute)
+ *  /dashboard/riwayat → Riwayat
+ *  /dashboard/profil  → Profil
  *  *            → redirect ke /    (catch-all)
  */
 function App() {
@@ -42,8 +44,9 @@ function App() {
         />
 
         {/* ── Halaman privat ── */}
+        {/* path="/dashboard/*" agar sub-route /dashboard/riwayat dll berfungsi */}
         <Route
-          path="/dashboard"
+          path="/dashboard/*"
           element={
             <ProtectedRoute>
               <Dashboard />

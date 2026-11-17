@@ -1,0 +1,223 @@
+/* ═══════════════════════════════════════════
+   DASHBOARD LAYOUT
+   Mobile-first · design token dari tokens.css
+═══════════════════════════════════════════ */
+
+/* ── Root ── */
+.dl-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.dl-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-primary);
+  /* Gradient tipis ke bawah biar tidak terlalu flat */
+  background: linear-gradient(135deg, #064E3B 0%, #08734B 100%);
+  box-shadow: 0 2px 12px rgba(6, 78, 59, 0.25);
+}
+
+/* ── Kiri: logo + sapaan ── */
+.dl-header__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0; /* agar teks bisa truncate */
+}
+
+.dl-header__logo {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+  border-radius: var(--radius-sm);
+  background: rgba(255,255,255,0.12);
+  padding: 2px;
+}
+
+.dl-header__greeting {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.dl-header__greeting-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.70);
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.dl-header__name {
+  font-size: 15px;
+  font-weight: 800;
+  color: #FFFFFF;
+  line-height: 1.3;
+  /* potong nama panjang */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 180px;
+}
+
+/* ── Kanan: avatar + logout ── */
+.dl-header__right {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* Avatar inisial */
+.dl-avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+/* Tombol logout */
+.dl-logout-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.20);
+  border-radius: var(--radius-md);
+  color: rgba(255, 255, 255, 0.85);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.dl-logout-btn:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.22);
+  color: #FFFFFF;
+}
+
+.dl-logout-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════════
+   KONTEN UTAMA
+══════════════════════════════ */
+.dl-main {
+  flex: 1;
+  /* padding bawah ekstra agar konten tidak tertutup bottom nav */
+  padding: var(--space-5) var(--space-4) calc(72px + var(--space-5));
+  width: 100%;
+  max-width: 768px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+/* ══════════════════════════════
+   BOTTOM NAVIGATION
+══════════════════════════════ */
+.dl-bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: stretch;
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  box-shadow: 0 -4px 16px rgba(6, 78, 59, 0.08);
+  /* safe area untuk iPhone dengan home indicator */
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  height: calc(64px + env(safe-area-inset-bottom, 0px));
+}
+
+.dl-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  padding: var(--space-2) var(--space-1);
+  color: var(--color-text-muted);
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.15s;
+  position: relative;
+}
+
+.dl-nav-item:hover {
+  color: var(--color-primary);
+}
+
+/* Indikator aktif — titik di atas ikon */
+.dl-nav-item--active {
+  color: var(--color-primary-button);
+}
+
+.dl-nav-item--active::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 32px;
+  height: 3px;
+  background: var(--color-primary-button);
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET & DESKTOP
+══════════════════════════════ */
+@media (min-width: 768px) {
+  .dl-header {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .dl-header__name {
+    max-width: 280px;
+    font-size: 16px;
+  }
+
+  .dl-main {
+    padding: var(--space-6) var(--space-8) calc(72px + var(--space-6));
+    max-width: 900px;
+  }
+}
+
+@media (min-width: 1024px) {
+  /* Di desktop bottom nav tetap tampil di bawah (mobile-first),
+     tapi bisa dikembangkan ke sidebar di tahap berikutnya */
+  .dl-main {
+    max-width: 1024px;
+  }
+}
