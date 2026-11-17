@@ -1,6 +1,8 @@
-/* ═══════════════════
-   PROFIL
-═══════════════════ */
+/* ═══════════════════════════════════════════
+   PROFIL PAGE
+   Mobile-first · design token dari tokens.css
+═══════════════════════════════════════════ */
+
 .profil-root {
   display: flex;
   flex-direction: column;
@@ -14,8 +16,33 @@
   margin: 0;
 }
 
-/* ── Kartu identitas ── */
-.profil-card {
+/* ══════════════════════════════
+   LOADING
+══════════════════════════════ */
+.profil-loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 48px 0;
+}
+
+.profil-loading__spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--color-border);
+  border-top-color: var(--color-primary-button);
+  border-radius: 50%;
+  animation: profil-spin 0.65s linear infinite;
+}
+
+@keyframes profil-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════
+   HERO — identitas utama
+══════════════════════════════ */
+.profil-hero {
   background: linear-gradient(135deg, #064E3B 0%, #08734B 100%);
   border-radius: var(--radius-lg);
   padding: var(--space-6);
@@ -24,72 +51,120 @@
   gap: var(--space-5);
 }
 
-.profil-card__avatar {
+.profil-hero__avatar {
   width: 64px;
   height: 64px;
   border-radius: 50%;
-  background: rgba(255,255,255,0.18);
-  border: 2.5px solid rgba(255,255,255,0.35);
+  background: rgba(255, 255, 255, 0.18);
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 22px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #fff;
   flex-shrink: 0;
   user-select: none;
 }
 
-.profil-card__info {
+.profil-hero__info {
   min-width: 0;
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-.profil-card__name {
+.profil-hero__name {
   font-size: 18px;
   font-weight: 800;
-  color: #FFFFFF;
+  color: #fff;
   margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.profil-card__role-badge {
+.profil-hero__badge {
   display: inline-block;
   font-size: 11px;
   font-weight: 700;
-  color: rgba(255,255,255,0.80);
-  background: rgba(255,255,255,0.14);
+  color: rgba(255, 255, 255, 0.80);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: var(--radius-full);
   padding: 3px 10px;
   letter-spacing: 0.5px;
 }
 
-/* ── Kartu detail ── */
-.profil-detail {
+/* ══════════════════════════════
+   PESAN GLOBAL
+══════════════════════════════ */
+.profil-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.profil-msg--success {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.profil-msg--error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+}
+
+/* ══════════════════════════════
+   SECTION — kartu putih
+══════════════════════════════ */
+.profil-section {
   background: var(--color-surface);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-card);
   padding: var(--space-2) var(--space-5);
+  display: flex;
+  flex-direction: column;
 }
 
-.profil-detail__row {
+.profil-section__header {
   display: flex;
   align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-4) 0 var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+  margin-bottom: var(--space-1);
+}
+
+.profil-section__title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  margin: 0;
+}
+
+/* ── Baris dalam section ── */
+.profil-row {
+  display: flex;
+  align-items: flex-start;
   gap: var(--space-4);
   padding: var(--space-4) 0;
 }
 
-.profil-detail__divider {
+.profil-divider {
   height: 1px;
   background: var(--color-border);
-  margin: 0;
 }
 
-.profil-detail__icon {
+.profil-row__icon {
   width: 36px;
   height: 36px;
   border-radius: var(--radius-md);
@@ -99,18 +174,29 @@
   justify-content: center;
   color: var(--color-primary-button);
   flex-shrink: 0;
+  margin-top: 2px;
 }
 
-.profil-detail__label {
+.profil-row__icon--sm {
+  width: 28px;
+  height: 28px;
+}
+
+.profil-row__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.profil-row__label {
   font-size: 11px;
   font-weight: 600;
   color: var(--color-text-muted);
   text-transform: uppercase;
   letter-spacing: 0.5px;
-  margin: 0 0 2px;
+  margin: 0 0 4px;
 }
 
-.profil-detail__value {
+.profil-row__value {
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text);
@@ -118,18 +204,300 @@
   word-break: break-all;
 }
 
-/* ── Placeholder ── */
-.profil-placeholder {
-  background: var(--color-surface);
-  border: 2px dashed var(--color-border);
-  border-radius: var(--radius-lg);
-  padding: var(--space-5) var(--space-4);
-  text-align: center;
+.profil-row__note {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 4px 0 0;
+}
+
+/* Baris display: value + tombol edit sejajar */
+.profil-row__display {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════
+   EDIT NAMA — inline form
+══════════════════════════════ */
+.profil-edit-name {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-1);
+}
+
+.profil-edit-name__input {
+  width: 100%;
+  height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-primary-button);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  font: inherit;
   font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+}
+
+.profil-edit-name__input:focus {
+  box-shadow: 0 0 0 3px rgba(8, 115, 75, 0.15);
+}
+
+.profil-edit-name__hint {
+  font-size: 12px;
+  margin: 0;
+}
+
+.profil-edit-name__hint--error {
+  color: #DC2626;
+}
+
+.profil-edit-name__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════
+   TOMBOL INLINE
+══════════════════════════════ */
+/* Tombol kecil "Edit" di samping nilai */
+.profil-inline-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 4px 10px;
+  background: var(--color-background);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  white-space: nowrap;
+}
+
+.profil-inline-btn:hover {
+  background: rgba(8, 115, 75, 0.06);
+  border-color: var(--color-primary-button);
+}
+
+/* Tombol aksi (Simpan/Batal/Bahaya) */
+.profil-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: 9px 18px;
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.15s, opacity 0.15s;
+  border: none;
+  white-space: nowrap;
+}
+
+.profil-action-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.profil-action-btn--save {
+  background: var(--color-primary-button);
+  color: #fff;
+}
+
+.profil-action-btn--save:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.profil-action-btn--cancel {
+  background: var(--color-background);
+  border: 1.5px solid var(--color-border);
   color: var(--color-text-muted);
 }
 
-/* ── Tombol logout ── */
+.profil-action-btn--cancel:hover:not(:disabled) {
+  border-color: var(--color-text-muted);
+  color: var(--color-text);
+}
+
+.profil-action-btn--danger {
+  background: #DC2626;
+  color: #fff;
+}
+
+.profil-action-btn--danger:hover:not(:disabled) {
+  background: #B91C1C;
+}
+
+/* ══════════════════════════════
+   SPINNER KECIL
+══════════════════════════════ */
+.profil-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: profil-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+.profil-spinner--white {
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+
+/* ══════════════════════════════
+   GANTI KATA SANDI
+══════════════════════════════ */
+.profil-pw-idle {
+  padding: var(--space-4) 0 var(--space-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.profil-pw-idle__desc {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.55;
+}
+
+.profil-change-pw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  align-self: flex-start;
+  padding: 9px 18px;
+  background: var(--color-background);
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.profil-change-pw-btn:hover {
+  background: rgba(6, 78, 59, 0.06);
+  border-color: var(--color-primary);
+}
+
+/* Form ganti password */
+.profil-pw-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  padding: var(--space-4) 0 var(--space-3);
+}
+
+.profil-pw-field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.profil-pw-field__label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-primary);
+}
+
+.profil-pw-field__wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.profil-pw-field__input {
+  width: 100%;
+  height: 48px;
+  padding: 0 44px 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+}
+
+.profil-pw-field__input:focus {
+  border-color: var(--color-primary-button);
+}
+
+.profil-pw-toggle {
+  position: absolute;
+  right: 12px;
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s;
+}
+
+.profil-pw-toggle:hover {
+  color: var(--color-primary);
+}
+
+.profil-pw-match {
+  font-size: 12px;
+  font-weight: 600;
+  margin: 2px 0 0;
+}
+
+.profil-pw-match--ok  { color: #10B981; }
+.profil-pw-match--err { color: #EF4444; }
+
+.profil-pw-msg {
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0;
+  padding: var(--space-3) var(--space-4);
+  border-radius: var(--radius-md);
+}
+
+.profil-pw-msg--error {
+  background: #FEF2F2;
+  color: #DC2626;
+  border: 1px solid #FECACA;
+}
+
+.profil-pw-msg--success {
+  background: #F0FDF4;
+  color: #15803D;
+  border: 1px solid #BBF7D0;
+}
+
+.profil-pw-actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ══════════════════════════════
+   LOGOUT
+══════════════════════════════ */
 .profil-logout-btn {
   display: flex;
   align-items: center;
@@ -148,11 +516,61 @@
   transition: background 0.15s;
 }
 
-.profil-logout-btn:hover:not(:disabled) {
+.profil-logout-btn:hover {
   background: #FEF2F2;
 }
 
-.profil-logout-btn:disabled {
-  opacity: 0.55;
-  cursor: not-allowed;
+.profil-logout-confirm {
+  background: var(--color-surface);
+  border: 1.5px solid #FECACA;
+  border-radius: var(--radius-lg);
+  padding: var(--space-5) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.profil-logout-confirm__text {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0;
+  text-align: center;
+}
+
+.profil-logout-confirm__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.profil-logout-confirm__actions .profil-action-btn {
+  flex: 1;
+  min-width: 100px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+══════════════════════════════ */
+@media (min-width: 600px) {
+  .profil-hero__avatar {
+    width: 72px;
+    height: 72px;
+    font-size: 24px;
+  }
+
+  .profil-hero__name {
+    font-size: 20px;
+  }
+
+  .profil-edit-name__actions,
+  .profil-pw-actions,
+  .profil-logout-confirm__actions {
+    flex-wrap: nowrap;
+  }
+
+  .profil-logout-confirm__actions .profil-action-btn {
+    flex: none;
+    padding: 9px 28px;
+  }
 }
