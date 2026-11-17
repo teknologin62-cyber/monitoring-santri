@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Eye, EyeOff, LogIn } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
 import InputField from "../components/InputField";
@@ -325,13 +325,7 @@ function Login() {
           {googleLoading ? "Menghubungkan..." : "Masuk dengan Google"}
         </button>
 
-        {/* Link daftar */}
-        <p className="login-card__footer">
-          Belum punya akun?{" "}
-          <Link to="/register" className="login-card__link">
-            Daftar di sini
-          </Link>
-        </p>
+        {/* Link daftar — dihapus (register publik dinonaktifkan v3.2) */}
 
       </div>
 
