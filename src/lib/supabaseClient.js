@@ -9,4 +9,20 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+/**
+ * Satu instance Supabase client untuk seluruh aplikasi.
+ * Dibuat sekali di sini dan di-import di tempat lain — tidak boleh
+ * memanggil createClient() lagi di file lain.
+ *
+ * Opsi auth:
+ *  - persistSession    : session disimpan di localStorage agar tetap ada setelah refresh
+ *  - autoRefreshToken  : token diperbarui otomatis sebelum kedaluwarsa
+ *  - detectSessionInUrl: membaca token dari URL hash setelah OAuth / magic link redirect
+ */
+export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
+  auth: {
+    persistSession: true,
+    autoRefreshToken: true,
+    detectSessionInUrl: true,
+  },
+});

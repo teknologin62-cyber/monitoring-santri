@@ -1,0 +1,150 @@
+/* ═══════════════════════════════════════════
+   DASHBOARD — placeholder
+   Mobile-first · design token dari tokens.css
+═══════════════════════════════════════════ */
+
+.dashboard-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background);
+}
+
+/* ── Header ── */
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-5);
+  background: var(--color-surface);
+  border-bottom: 1px solid var(--color-border);
+  box-shadow: 0 1px 4px rgba(6, 78, 59, 0.06);
+}
+
+.dashboard-header__brand {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.dashboard-header__logo {
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.dashboard-header__name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-primary);
+}
+
+.dashboard-logout-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: 8px 16px;
+  background: none;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+
+.dashboard-logout-btn:hover:not(:disabled) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+  background: rgba(6, 78, 59, 0.04);
+}
+
+.dashboard-logout-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+/* ── Konten utama ── */
+.dashboard-main {
+  flex: 1;
+  padding: var(--space-6) var(--space-4);
+  max-width: 720px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+}
+
+/* ── Kartu selamat datang ── */
+.dashboard-welcome-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-6);
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-5);
+}
+
+.dashboard-welcome-card__icon {
+  width: 56px;
+  height: 56px;
+  flex-shrink: 0;
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+}
+
+.dashboard-welcome-card__title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 var(--space-1);
+}
+
+.dashboard-welcome-card__email {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-primary-button);
+  margin: 0 0 var(--space-3);
+}
+
+.dashboard-welcome-card__note {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin: 0;
+}
+
+/* ── Placeholder ── */
+.dashboard-placeholder {
+  background: var(--color-surface);
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-8) var(--space-6);
+  text-align: center;
+  color: var(--color-text-muted);
+  font-size: 15px;
+}
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+  .dashboard-header {
+    padding: var(--space-4) var(--space-8);
+  }
+
+  .dashboard-main {
+    padding: var(--space-8) var(--space-6);
+  }
+
+  .dashboard-welcome-card__title {
+    font-size: 22px;
+  }
+}
