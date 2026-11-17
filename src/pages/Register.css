@@ -1,0 +1,432 @@
+/* ═══════════════════════════════════════════
+   REGISTER PAGE
+   Mobile-first · design token dari tokens.css
+   Pola visual konsisten dengan Login
+═══════════════════════════════════════════ */
+
+/* ── Root wrapper ── */
+.register-root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-background);
+  padding: var(--space-6) var(--space-4) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ══════════════════════════════
+   DEKORASI LINGKARAN BACKGROUND
+══════════════════════════════ */
+.register-bg-deco {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.register-bg-deco__circle {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.register-bg-deco__circle--tl {
+  width: 480px;
+  height: 480px;
+  background: var(--color-primary);
+  opacity: 0.06;
+  top: -180px;
+  right: -140px;
+}
+
+.register-bg-deco__circle--br {
+  width: 340px;
+  height: 340px;
+  background: var(--color-mint);
+  opacity: 0.15;
+  bottom: 100px;
+  left: -100px;
+}
+
+/* ══════════════════════════════
+   KARTU
+══════════════════════════════ */
+.register-card {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: 0 8px 40px rgba(6, 78, 59, 0.10);
+  padding: 32px 24px 28px;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  margin-bottom: 24px;
+}
+
+/* ── Header kartu ── */
+.register-card__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  text-align: center;
+}
+
+.register-card__logo {
+  width: 68px;
+  height: 68px;
+  object-fit: contain;
+  margin-bottom: var(--space-1);
+}
+
+.register-card__app-name {
+  font-size: 15px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.register-card__app-tagline {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  letter-spacing: 0.5px;
+  margin: 0 0 var(--space-3);
+}
+
+.register-card__title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+  line-height: 1.25;
+}
+
+.register-card__subtitle {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Footer kartu ── */
+.register-card__footer {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  text-align: center;
+  margin: 0;
+}
+
+.register-card__link {
+  color: var(--color-primary-button);
+  font-weight: 700;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.register-card__link:hover {
+  color: var(--color-primary-hover);
+  text-decoration: underline;
+}
+
+/* ══════════════════════════════
+   BANNER NOTIFIKASI
+══════════════════════════════ */
+.register-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.register-banner--error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+}
+
+.register-banner__icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* ══════════════════════════════
+   FORM
+══════════════════════════════ */
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+/* ── Tombol utama: flex agar ikon + teks sejajar ── */
+.register-form .primary-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+}
+
+/* ── Password wrap + toggle ── */
+.register-pw-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.register-pw-wrap input {
+  width: 100%;
+  height: 52px;
+  padding: 0 48px 0 16px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  outline: none;
+  font: inherit;
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.register-pw-wrap input:focus {
+  border-color: var(--color-primary-button);
+}
+
+.register-pw-toggle {
+  position: absolute;
+  right: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  color: var(--color-text-muted);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  transition: color 0.15s;
+}
+
+.register-pw-toggle:hover {
+  color: var(--color-primary);
+}
+
+/* ── Indikator kekuatan password ── */
+.register-pw-strength {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-top: var(--space-2);
+}
+
+.register-pw-strength__bars {
+  display: flex;
+  gap: 4px;
+}
+
+.register-pw-strength__bar {
+  display: block;
+  width: 32px;
+  height: 4px;
+  border-radius: 999px;
+  background: var(--color-border);
+  transition: background 0.2s;
+}
+
+.register-pw-strength__bar.active {
+  background: var(--color-mint);
+}
+
+/* Override warna bar sesuai level melalui parent */
+.register-pw-strength:has(.register-pw-strength__label--weak) .register-pw-strength__bar.active {
+  background: #EF4444;
+}
+
+.register-pw-strength:has(.register-pw-strength__label--fair) .register-pw-strength__bar.active {
+  background: #F59E0B;
+}
+
+.register-pw-strength:has(.register-pw-strength__label--strong) .register-pw-strength__bar.active {
+  background: #10B981;
+}
+
+.register-pw-strength__label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.register-pw-strength__label--weak   { color: #EF4444; }
+.register-pw-strength__label--fair   { color: #F59E0B; }
+.register-pw-strength__label--strong { color: #10B981; }
+
+/* ── Indikator kecocokan password ── */
+.register-match-hint {
+  font-size: 12px;
+  font-weight: 600;
+  margin: var(--space-2) 0 0;
+}
+
+.register-match-hint--ok  { color: #10B981; }
+.register-match-hint--err { color: #EF4444; }
+
+/* ── Spinner loading ── */
+.register-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: register-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes register-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════
+   LAYAR SUKSES — EMAIL CONFIRMATION
+══════════════════════════════ */
+.register-card--success {
+  align-items: center;
+  text-align: center;
+  gap: var(--space-4);
+  padding: 40px 28px;
+}
+
+.register-success__icon {
+  font-size: 48px;
+  line-height: 1;
+  /* Ganti jadi kotak hijau muda bergambar amplop */
+  width: 80px;
+  height: 80px;
+  background: var(--color-background);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-primary);
+  font-size: 36px;
+}
+
+.register-success__title {
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.register-success__body {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.register-success__email {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  margin: 0;
+  word-break: break-all;
+}
+
+.register-success__note {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  line-height: 1.65;
+  margin: 0;
+}
+
+.register-success__back {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 52px;
+  background: var(--color-primary-button);
+  color: var(--color-text-white);
+  border-radius: var(--radius-full);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s;
+  margin-top: var(--space-2);
+}
+
+.register-success__back:hover {
+  background: var(--color-primary-hover);
+}
+
+/* ══════════════════════════════
+   GELOMBANG BAWAH
+══════════════════════════════ */
+.register-wave {
+  position: relative;
+  z-index: 0;
+  width: 100%;
+  margin-top: auto;
+  line-height: 0;
+  align-self: flex-end;
+}
+
+.register-wave svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  min-height: 70px;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+══════════════════════════════ */
+@media (min-width: 600px) {
+  .register-root {
+    padding: var(--space-8) var(--space-6) 0;
+  }
+
+  .register-card {
+    padding: 40px 40px 32px;
+    max-width: 460px;
+  }
+
+  .register-card__logo {
+    width: 76px;
+    height: 76px;
+  }
+
+  .register-card__title {
+    font-size: 24px;
+  }
+
+  .register-wave svg {
+    min-height: 90px;
+  }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — DESKTOP (≥ 1024px)
+══════════════════════════════ */
+@media (min-width: 1024px) {
+  .register-card {
+    padding: 48px 48px 36px;
+  }
+
+  .register-card__title {
+    font-size: 26px;
+  }
+
+  .register-wave svg {
+    min-height: 110px;
+  }
+}
