@@ -156,6 +156,51 @@
   gap: var(--space-4);
 }
 
+/* ── Banner info (petunjuk lupa password) ── */
+.login-banner--info {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+}
+
+/* ── Username wrap dengan ikon di kiri ── */
+.login-username-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.login-username-wrap__icon {
+  position: absolute;
+  left: 14px;
+  display: flex;
+  align-items: center;
+  color: var(--color-text-muted);
+  pointer-events: none;
+}
+
+.login-username-wrap input {
+  width: 100%;
+  height: 52px;
+  padding: 0 16px 0 42px;   /* ruang untuk ikon di kiri */
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  outline: none;
+  font: inherit;
+  color: var(--color-text);
+  transition: border-color 0.2s;
+  box-sizing: border-box;
+}
+
+.login-username-wrap input:focus {
+  border-color: var(--color-primary-button);
+}
+
+.login-username-wrap input::placeholder {
+  color: var(--color-text-muted);
+}
+
 /* ── Password wrap + toggle ── */
 .login-pw-wrap {
   position: relative;
