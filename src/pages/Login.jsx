@@ -63,7 +63,17 @@ function Login() {
         .maybeSingle();
 
       if (lookupError) {
-        setError("Terjadi kesalahan. Silakan coba lagi.");
+        /* Tunjukkan pesan lebih spesifik untuk membantu debug */
+        const m = lookupError.message?.toLowerCase() ?? "";
+        if (m.includes("column") && m.includes("username")) {
+          setError("Konfigurasi belum selesai: kolom username belum tersedia. Hubungi administrator.");
+        } else if (m.includes("relation") || m.includes("does not exist")) {
+          setError("Konfigurasi belum selesai: tabel profil belum tersedia. Hubungi administrator.");
+        } else if (m.includes("permission") || m.includes("rls") || m.includes("policy")) {
+          setError("Akses ditolak saat mencari akun. Hubungi administrator.");
+        } else {
+          setError(`Gagal mencari akun: ${lookupError.message}`);
+        }
         return;
       }
 
