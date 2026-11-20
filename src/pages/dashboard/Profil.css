@@ -550,15 +550,223 @@
 }
 
 /* ══════════════════════════════
-   RESPONSIVE — TABLET (≥ 600px)
+   AVATAR WRAP — foto profil
+══════════════════════════════ */
+
+/* Wrapper posisi relatif agar tombol kamera dan menu bisa di-overlay */
+.profil-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+/* Foto jika sudah diupload */
+.profil-avatar-img {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2.5px solid rgba(255, 255, 255, 0.45);
+  display: block;
+}
+
+/* Inisial jika belum ada foto */
+.profil-avatar-initials {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.18);
+  border: 2.5px solid rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 800;
+  color: #fff;
+  user-select: none;
+}
+
+/* Tombol kamera kecil di sudut kanan bawah avatar */
+.profil-avatar-camera-btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--color-primary-button);
+  border: 2px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.15s;
+  padding: 0;
+}
+
+.profil-avatar-camera-btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+}
+
+.profil-avatar-camera-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Spinner sangat kecil di dalam tombol kamera */
+.profil-spinner-sm {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: profil-spin 0.65s linear infinite;
+}
+
+/* Input file tersembunyi */
+.profil-file-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ── Dropdown menu foto ── */
+.profil-photo-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  z-index: 200;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  box-shadow: 0 8px 24px rgba(6, 78, 59, 0.14);
+  min-width: 160px;
+  overflow: hidden;
+}
+
+.profil-photo-menu__item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: 10px 14px;
+  background: none;
+  border: none;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.12s;
+}
+
+.profil-photo-menu__item:hover {
+  background: var(--color-background);
+}
+
+.profil-photo-menu__item--danger {
+  color: #DC2626;
+}
+
+.profil-photo-menu__item--danger:hover {
+  background: #FEF2F2;
+}
+
+/* Backdrop transparan untuk menutup menu saat klik luar */
+.profil-photo-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 199;
+}
+
+/* ══════════════════════════════
+   PREVIEW BAR — pratinjau sebelum simpan
+══════════════════════════════ */
+.profil-photo-preview-bar {
+  background: var(--color-surface);
+  border: 1.5px solid var(--color-primary-button);
+  border-radius: var(--radius-lg);
+  padding: var(--space-3) var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+  box-shadow: 0 2px 12px rgba(8, 115, 75, 0.10);
+}
+
+.profil-photo-preview-bar__left {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  min-width: 0;
+}
+
+.profil-photo-preview-bar__thumb {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--color-border);
+  flex-shrink: 0;
+}
+
+.profil-photo-preview-bar__filename {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--color-text);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+}
+
+.profil-photo-preview-bar__size {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.profil-photo-preview-bar__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+/* ══════════════════════════════
+   RESPONSIVE TAMBAHAN
 ══════════════════════════════ */
 @media (min-width: 600px) {
-  .profil-hero__avatar {
+  .profil-avatar-img,
+  .profil-avatar-initials {
     width: 72px;
     height: 72px;
     font-size: 24px;
   }
 
+  .profil-avatar-camera-btn {
+    width: 28px;
+    height: 28px;
+  }
+
+  .profil-photo-preview-bar {
+    flex-wrap: nowrap;
+  }
+
+  .profil-photo-preview-bar__filename {
+    max-width: 240px;
+  }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px) — existing rules
+══════════════════════════════ */
+@media (min-width: 600px) {
   .profil-hero__name {
     font-size: 20px;
   }
