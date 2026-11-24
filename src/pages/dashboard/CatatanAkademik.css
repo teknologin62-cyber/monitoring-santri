@@ -1,0 +1,468 @@
+/* ═══════════════════════════════════════════
+   CATATAN AKADEMIK
+   Mobile-first · design token dari tokens.css
+═══════════════════════════════════════════ */
+
+.akademik-root {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-5);
+  padding-bottom: var(--space-6);
+}
+
+/* ══════════════════════════════
+   HEADER
+══════════════════════════════ */
+.akademik-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.akademik-back-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-primary);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background 0.15s;
+}
+
+.akademik-back-btn:hover { background: var(--color-background); }
+
+.akademik-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 2px;
+}
+
+.akademik-subtitle {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* ══════════════════════════════
+   BANNER PESAN
+══════════════════════════════ */
+.akademik-msg {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  border-radius: var(--radius-md);
+  padding: var(--space-3) var(--space-4);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.55;
+}
+
+.akademik-msg--success {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.akademik-msg--error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+}
+
+/* ══════════════════════════════
+   KARTU TANGGAL
+══════════════════════════════ */
+.akademik-date-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.akademik-date-card__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin: 0 0 4px;
+}
+
+.akademik-date-card__display {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary);
+  margin: 0;
+}
+
+.akademik-date-input {
+  height: 40px;
+  padding: 0 12px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  font: inherit;
+  font-size: 13px;
+  color: var(--color-text);
+  outline: none;
+  cursor: pointer;
+  transition: border-color 0.15s;
+  flex-shrink: 0;
+}
+
+.akademik-date-input:focus {
+  border-color: var(--color-primary-button);
+}
+
+/* ══════════════════════════════
+   RINGKASAN NILAI
+══════════════════════════════ */
+.akademik-summary {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+}
+
+.akademik-summary__item {
+  flex: 1;
+  text-align: center;
+}
+
+.akademik-summary__value {
+  font-size: 24px;
+  font-weight: 800;
+  color: var(--color-primary);
+  margin: 0 0 2px;
+  line-height: 1;
+}
+
+.akademik-summary__label {
+  font-size: 11px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.akademik-summary__divider {
+  width: 1px;
+  height: 36px;
+  background: var(--color-border);
+  flex-shrink: 0;
+}
+
+.akademik-summary__predikat {
+  font-size: 24px;
+  font-weight: 800;
+  margin: 0 0 2px;
+  line-height: 1;
+}
+
+.akademik-summary__predikat--green  { color: #15803D; }
+.akademik-summary__predikat--blue   { color: #1D4ED8; }
+.akademik-summary__predikat--amber  { color: #B45309; }
+.akademik-summary__predikat--red    { color: #DC2626; }
+
+/* ══════════════════════════════
+   GRUP
+══════════════════════════════ */
+.akademik-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.akademik-group__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.akademik-group__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.akademik-group__count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary-button);
+  background: #ECFDF5;
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+}
+
+/* ══════════════════════════════
+   LIST BARIS NILAI
+══════════════════════════════ */
+.akademik-rows-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+/* ── Satu baris nilai ── */
+.akademik-row {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  padding: var(--space-4) var(--space-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  position: relative;
+}
+
+.akademik-row__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  display: block;
+  margin: 0 0 var(--space-1);
+}
+
+.akademik-row__mapel {
+  display: flex;
+  flex-direction: column;
+}
+
+.akademik-row__mapel-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* ── Input nilai dan predikat sejajar ── */
+.akademik-row__nilai-wrap {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-3);
+}
+
+.akademik-row__nilai {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.akademik-row__catatan {
+  display: flex;
+  flex-direction: column;
+}
+
+.akademik-row__remove {
+  position: absolute;
+  top: var(--space-3);
+  right: var(--space-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: #EF4444;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.15s, background 0.15s;
+  padding: 0;
+}
+
+.akademik-row__remove:hover {
+  opacity: 1;
+  background: #FEF2F2;
+}
+
+/* ══════════════════════════════
+   FORM INPUTS
+══════════════════════════════ */
+.akademik-select,
+.akademik-input-text,
+.akademik-input-nilai {
+  height: 48px;
+  padding: 0 14px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.akademik-select { cursor: pointer; }
+
+.akademik-input-nilai {
+  width: 100px;
+  min-width: 80px;
+  text-align: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.akademik-select:focus,
+.akademik-input-text:focus,
+.akademik-input-nilai:focus {
+  border-color: var(--color-primary-button);
+}
+
+/* ── Hapus spinner bawaan browser pada number input ── */
+.akademik-input-nilai::-webkit-outer-spin-button,
+.akademik-input-nilai::-webkit-inner-spin-button { -webkit-appearance: none; }
+.akademik-input-nilai { -moz-appearance: textfield; }
+
+/* ══════════════════════════════
+   BADGE PREDIKAT
+══════════════════════════════ */
+.akademik-predikat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 68px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+  gap: 1px;
+}
+
+.akademik-predikat__label {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.akademik-predikat__ket {
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  line-height: 1;
+}
+
+.akademik-predikat--green  { background: #F0FDF4; color: #15803D; }
+.akademik-predikat--blue   { background: #EFF6FF; color: #1D4ED8; }
+.akademik-predikat--amber  { background: #FFFBEB; color: #B45309; }
+.akademik-predikat--red    { background: #FEF2F2; color: #DC2626; }
+
+/* ══════════════════════════════
+   TOMBOL TAMBAH BARIS
+══════════════════════════════ */
+.akademik-add-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: 48px;
+  background: none;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-lg);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.akademik-add-btn:hover:not(:disabled) {
+  background: #ECFDF5;
+  border-color: var(--color-primary-button);
+}
+
+.akademik-add-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ══════════════════════════════
+   TOMBOL SIMPAN
+══════════════════════════════ */
+.akademik-save-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  height: 56px;
+  background: var(--color-primary-button);
+  color: #fff;
+  border: none;
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 4px 20px rgba(8,115,75,0.30);
+  transition: background 0.15s, transform 0.12s, box-shadow 0.15s;
+  position: sticky;
+  bottom: calc(72px + 12px);
+}
+
+.akademik-save-btn:hover:not(:disabled) {
+  background: var(--color-primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(8,115,75,0.38);
+}
+
+.akademik-save-btn:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.akademik-spinner {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: akademik-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes akademik-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ══════════════════════════════
+   RESPONSIVE — TABLET (≥ 600px)
+══════════════════════════════ */
+@media (min-width: 600px) {
+  .akademik-title { font-size: 22px; }
+
+  .akademik-row {
+    padding: var(--space-5) var(--space-6);
+  }
+
+  /* Di tablet: mapel dan nilai sejajar dalam satu baris */
+  .akademik-row__top {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--space-4);
+    align-items: end;
+  }
+}

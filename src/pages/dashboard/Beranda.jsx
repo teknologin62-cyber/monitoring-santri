@@ -117,12 +117,15 @@ function Beranda() {
             <span className="beranda-menu-card__label">Catatan Akhlak</span>
           </button>
 
-          <button type="button" className="beranda-menu-card" disabled>
+          <button
+            type="button"
+            className="beranda-menu-card"
+            onClick={() => navigate("/dashboard/akademik")}
+          >
             <div className="beranda-menu-card__icon beranda-menu-card__icon--amber">
               <BookOpen size={28} />
             </div>
             <span className="beranda-menu-card__label">Catatan Akademik</span>
-            <span className="beranda-menu-card__badge">Segera</span>
           </button>
 
           <button type="button" className="beranda-menu-card" disabled>
