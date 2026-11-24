@@ -1,9 +1,9 @@
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Mail, User, Shield, LogOut,
   Pencil, KeyRound, Check, X, Eye, EyeOff,
-  Camera, Trash2,
+  Camera, Trash2, Users, Plus, GraduationCap,
 } from "lucide-react";
 import { supabase } from "../../lib/supabaseClient";
 import useAuth from "../../hooks/useAuth";
@@ -253,6 +253,95 @@ function Profil() {
       });
     } finally {
       setPwLoading(false);
+    }
+  }
+
+  /* ══════════════════════════════
+     STATE — santri yang diasuh
+  ══════════════════════════════ */
+  const [santriList,    setSantriList]    = useState([]);
+  const [santriLoading, setSantriLoading] = useState(false);
+  const [santriMsg,     setSantriMsg]     = useState({ type: "", text: "" });
+
+  /* Form tambah santri */
+  const [showAddForm,   setShowAddForm]   = useState(false);
+  const [newNama,       setNewNama]       = useState("");
+  const [newKelas,      setNewKelas]      = useState("");
+  const [addLoading,    setAddLoading]    = useState(false);
+  const [addMsg,        setAddMsg]        = useState({ type: "", text: "" });
+
+  /* Muat daftar santri dari Supabase */
+  const loadSantri = useCallback(async () => {
+    if (!user?.id) return;
+    setSantriLoading(true);
+    setSantriMsg({ type: "", text: "" });
+    try {
+      const { data, error } = await supabase
+        .from("santri_diasuh")
+        .select("*")
+        .eq("ustadz_id", user.id)
+        .order("nama_santri", { ascending: true });
+      if (error) throw error;
+      setSantriList(data ?? []);
+    } catch (err) {
+      const m = err?.message?.toLowerCase() ?? "";
+      if (m.includes("does not exist") || m.includes("relation")) {
+        setSantriMsg({ type: "info", text: "Tabel santri belum tersedia. Jalankan SQL migration." });
+      } else {
+        setSantriMsg({ type: "error", text: "Gagal memuat daftar santri." });
+      }
+    } finally {
+      setSantriLoading(false);
+    }
+  }, [user?.id]);
+
+  useEffect(() => { loadSantri(); }, [loadSantri]);
+
+  /* Tambah santri baru */
+  async function handleAddSantri() {
+    setAddMsg({ type: "", text: "" });
+    const nama  = newNama.trim();
+    const kelas = newKelas.trim();
+    if (!nama)  { setAddMsg({ type: "error", text: "Nama santri tidak boleh kosong." }); return; }
+    if (!kelas) { setAddMsg({ type: "error", text: "Kelas tidak boleh kosong." }); return; }
+
+    setAddLoading(true);
+    try {
+      const { error } = await supabase
+        .from("santri_diasuh")
+        .insert({ ustadz_id: user.id, nama_santri: nama, kelas });
+      if (error) throw error;
+      setNewNama("");
+      setNewKelas("");
+      setShowAddForm(false);
+      await loadSantri();
+      setSantriMsg({ type: "success", text: `Santri "${nama}" berhasil ditambahkan.` });
+    } catch (err) {
+      const m = err?.message?.toLowerCase() ?? "";
+      if (m.includes("duplicate") || m.includes("unique")) {
+        setAddMsg({ type: "error", text: "Santri dengan nama ini sudah ada." });
+      } else {
+        setAddMsg({ type: "error", text: `Gagal menambahkan: ${err?.message ?? "Silakan coba lagi."}` });
+      }
+    } finally {
+      setAddLoading(false);
+    }
+  }
+
+  /* Hapus santri */
+  async function handleDeleteSantri(id, nama) {
+    if (!window.confirm(`Hapus santri "${nama}" dari daftar Anda?`)) return;
+    try {
+      const { error } = await supabase
+        .from("santri_diasuh")
+        .delete()
+        .eq("id", id)
+        .eq("ustadz_id", user.id);
+      if (error) throw error;
+      await loadSantri();
+      setSantriMsg({ type: "success", text: `Santri "${nama}" dihapus dari daftar.` });
+    } catch {
+      setSantriMsg({ type: "error", text: "Gagal menghapus santri." });
     }
   }
 
@@ -560,6 +649,143 @@ function Profil() {
               <KeyRound size={16} /> Ganti Kata Sandi
             </button>
           </div>
+        )}
+      </div>
+
+      {/* ═══════════════════════════════
+          SANTRI YANG DIASUH
+      ═══════════════════════════════ */}
+      <div className="profil-section">
+        <div className="profil-section__header">
+          <div className="profil-row__icon profil-row__icon--sm" aria-hidden="true">
+            <Users size={18} />
+          </div>
+          <p className="profil-section__title">Santri yang Diasuh</p>
+          <span className="profil-santri-count">{santriList.length}</span>
+        </div>
+
+        {/* Pesan santri */}
+        {santriMsg.text && (
+          <div className={`profil-santri-msg profil-santri-msg--${santriMsg.type}`}
+            role={santriMsg.type === "error" ? "alert" : "status"}>
+            {santriMsg.type === "success" ? "✓" : santriMsg.type === "info" ? "ℹ" : "⚠"} {santriMsg.text}
+          </div>
+        )}
+
+        {/* Loading */}
+        {santriLoading && (
+          <div className="profil-santri-loading">
+            <span className="profil-spinner-sm profil-spinner-sm--dark" aria-hidden="true" />
+            <span>Memuat...</span>
+          </div>
+        )}
+
+        {/* Daftar santri */}
+        {!santriLoading && santriList.length > 0 && (
+          <ul className="profil-santri-list">
+            {santriList.map((s, idx) => (
+              <li key={s.id}>
+                <div className="profil-santri-item">
+                  <div className="profil-santri-item__avatar" aria-hidden="true">
+                    {s.nama_santri?.[0]?.toUpperCase() ?? "?"}
+                  </div>
+                  <div className="profil-santri-item__info">
+                    <p className="profil-santri-item__nama">{s.nama_santri}</p>
+                    <p className="profil-santri-item__kelas">
+                      <GraduationCap size={12} style={{ display:"inline", marginRight:4, verticalAlign:"middle" }} />
+                      {s.kelas}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    className="profil-santri-item__hapus"
+                    onClick={() => handleDeleteSantri(s.id, s.nama_santri)}
+                    aria-label={`Hapus ${s.nama_santri}`}
+                  >
+                    <Trash2 size={15} />
+                  </button>
+                </div>
+                {idx < santriList.length - 1 && <div className="profil-divider" />}
+              </li>
+            ))}
+          </ul>
+        )}
+
+        {/* Empty state */}
+        {!santriLoading && santriList.length === 0 && !santriMsg.text && (
+          <p className="profil-santri-empty">
+            Belum ada santri yang ditambahkan.
+          </p>
+        )}
+
+        {/* Form tambah santri */}
+        {showAddForm ? (
+          <div className="profil-santri-form">
+            <div className="profil-santri-form__fields">
+              <div className="profil-santri-form__field">
+                <label className="profil-santri-form__label" htmlFor="santri-nama">
+                  Nama Santri
+                </label>
+                <input
+                  id="santri-nama"
+                  type="text"
+                  className="profil-santri-form__input"
+                  placeholder="Nama lengkap santri"
+                  value={newNama}
+                  onChange={(e) => setNewNama(e.target.value)}
+                  maxLength={80}
+                  autoFocus
+                  onKeyDown={(e) => { if (e.key === "Enter") handleAddSantri(); if (e.key === "Escape") setShowAddForm(false); }}
+                />
+              </div>
+              <div className="profil-santri-form__field">
+                <label className="profil-santri-form__label" htmlFor="santri-kelas">
+                  Kelas
+                </label>
+                <input
+                  id="santri-kelas"
+                  type="text"
+                  className="profil-santri-form__input"
+                  placeholder="Contoh: Kelas 7A"
+                  value={newKelas}
+                  onChange={(e) => setNewKelas(e.target.value)}
+                  maxLength={40}
+                  onKeyDown={(e) => { if (e.key === "Enter") handleAddSantri(); if (e.key === "Escape") setShowAddForm(false); }}
+                />
+              </div>
+            </div>
+            {addMsg.text && (
+              <p className="profil-santri-form__error" role="alert">{addMsg.text}</p>
+            )}
+            <div className="profil-santri-form__actions">
+              <button
+                type="button"
+                className="profil-action-btn profil-action-btn--save"
+                onClick={handleAddSantri}
+                disabled={addLoading}
+              >
+                {addLoading ? <span className="profil-spinner" aria-hidden="true" /> : <Check size={15} />}
+                {addLoading ? "Menyimpan..." : "Simpan"}
+              </button>
+              <button
+                type="button"
+                className="profil-action-btn profil-action-btn--cancel"
+                onClick={() => { setShowAddForm(false); setAddMsg({ type:"",text:"" }); }}
+                disabled={addLoading}
+              >
+                <X size={15} /> Batal
+              </button>
+            </div>
+          </div>
+        ) : (
+          <button
+            type="button"
+            className="profil-santri-add-btn"
+            onClick={() => { setShowAddForm(true); setAddMsg({ type:"",text:"" }); setSantriMsg({ type:"",text:"" }); }}
+          >
+            <Plus size={16} />
+            Tambah Santri
+          </button>
         )}
       </div>
 

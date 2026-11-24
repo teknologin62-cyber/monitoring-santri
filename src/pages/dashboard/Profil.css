@@ -782,3 +782,255 @@
     padding: 9px 28px;
   }
 }
+
+/* ══════════════════════════════
+   SANTRI YANG DIASUH
+══════════════════════════════ */
+
+/* Badge jumlah santri di header seksi */
+.profil-santri-count {
+  margin-left: auto;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  background: #ECFDF5;
+  border-radius: var(--radius-full);
+  padding: 2px 10px;
+  min-width: 24px;
+  text-align: center;
+}
+
+/* Pesan dalam seksi santri */
+.profil-santri-msg {
+  font-size: 13px;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  padding: var(--space-2) var(--space-4);
+  margin: var(--space-3) 0 0;
+  line-height: 1.5;
+}
+
+.profil-santri-msg--success {
+  background: #F0FDF4;
+  border: 1px solid #BBF7D0;
+  color: #15803D;
+}
+
+.profil-santri-msg--error {
+  background: #FEF2F2;
+  border: 1px solid #FECACA;
+  color: #DC2626;
+}
+
+.profil-santri-msg--info {
+  background: #EFF6FF;
+  border: 1px solid #BFDBFE;
+  color: #1D4ED8;
+}
+
+/* Loading inline */
+.profil-santri-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-4) 0;
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.profil-spinner-sm--dark {
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary-button);
+  border-radius: 50%;
+  animation: profil-spin 0.65s linear infinite;
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* Daftar santri */
+.profil-santri-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.profil-santri-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+}
+
+/* Avatar inisial santri */
+.profil-santri-item__avatar {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #064E3B, #08734B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.profil-santri-item__info {
+  flex: 1;
+  min-width: 0;
+}
+
+.profil-santri-item__nama {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  margin: 0 0 2px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.profil-santri-item__kelas {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+/* Tombol hapus santri */
+.profil-santri-item__hapus {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  color: #EF4444;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.15s, background 0.15s;
+  flex-shrink: 0;
+  padding: 0;
+}
+
+.profil-santri-item__hapus:hover {
+  opacity: 1;
+  background: #FEF2F2;
+}
+
+/* Empty state */
+.profil-santri-empty {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: var(--space-4) 0 var(--space-2);
+  margin: 0;
+  text-align: center;
+}
+
+/* Tombol tambah santri */
+.profil-santri-add-btn {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin: var(--space-4) 0 var(--space-3);
+  padding: 10px 18px;
+  background: none;
+  border: 2px dashed var(--color-border);
+  border-radius: var(--radius-full);
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  align-self: flex-start;
+}
+
+.profil-santri-add-btn:hover {
+  background: #ECFDF5;
+  border-color: var(--color-primary-button);
+}
+
+/* Form tambah santri */
+.profil-santri-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-4) 0 var(--space-3);
+  border-top: 1px solid var(--color-border);
+  margin-top: var(--space-3);
+}
+
+.profil-santri-form__fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.profil-santri-form__field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.profil-santri-form__label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.profil-santri-form__input {
+  height: 46px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-input);
+  font: inherit;
+  font-size: 14px;
+  color: var(--color-text);
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.profil-santri-form__input:focus {
+  border-color: var(--color-primary-button);
+  box-shadow: 0 0 0 3px rgba(8, 115, 75, 0.12);
+}
+
+.profil-santri-form__error {
+  font-size: 12px;
+  font-weight: 600;
+  color: #DC2626;
+  margin: 0;
+}
+
+.profil-santri-form__actions {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+/* ── Responsive ── */
+@media (min-width: 600px) {
+  .profil-santri-form__fields {
+    flex-direction: row;
+    gap: var(--space-3);
+  }
+
+  .profil-santri-form__field {
+    flex: 1;
+  }
+
+  .profil-santri-form__actions {
+    flex-wrap: nowrap;
+  }
+}
