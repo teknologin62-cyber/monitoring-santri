@@ -1,4 +1,5 @@
 import { BookOpen, Users, ClipboardCheck, Award } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 import useAuth from "../../hooks/useAuth";
 import "./Beranda.css";
 
@@ -9,6 +10,7 @@ import "./Beranda.css";
  * Kartu statistik akan diisi data nyata setelah tabel Supabase dibuat (Tahap 2).
  */
 function Beranda() {
+  const navigate    = useNavigate();
   const { fullName, role } = useAuth();
   const displayName = fullName || "Pengguna";
 
@@ -95,15 +97,16 @@ function Beranda() {
         <h2 className="beranda-section-title">Menu</h2>
         <div className="beranda-menu-grid">
 
-          <button type="button" className="beranda-menu-card" disabled>
+          <button
+            type="button"
+            className="beranda-menu-card"
+            onClick={() => navigate("/dashboard/amal")}
+          >
             <div className="beranda-menu-card__icon beranda-menu-card__icon--green">
               <ClipboardCheck size={28} />
             </div>
             <span className="beranda-menu-card__label">Input Amal Santri</span>
-            <span className="beranda-menu-card__badge">Segera</span>
-          </button>
-
-          <button type="button" className="beranda-menu-card" disabled>
+          </button>          <button type="button" className="beranda-menu-card" disabled>
             <div className="beranda-menu-card__icon beranda-menu-card__icon--blue">
               <BookOpen size={28} />
             </div>
