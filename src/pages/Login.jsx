@@ -1,19 +1,26 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { Eye, EyeOff, LogIn, User } from "lucide-react";
+import { useNavigate, Link } from "react-router-dom";
+import { Eye, EyeOff, LogIn } from "lucide-react";
 import { supabase } from "../lib/supabaseClient";
+import InputField from "../components/InputField";
 import PrimaryButton from "../components/PrimaryButton";
 import "./Login.css";
 
-/* ─── terjemahan pesan error Supabase ─── */
+/* ─── helpers ─── */
+function isValidEmail(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim());
+}
+
 function translateError(msg) {
   const m = msg.toLowerCase();
   if (m.includes("invalid login credentials") || m.includes("invalid login"))
-    return "Nama pengguna atau kata sandi salah.";
+    return "Email atau kata sandi salah. Silakan coba lagi.";
   if (m.includes("email not confirmed"))
-    return "Akun belum dikonfirmasi. Hubungi administrator.";
+    return "Akun belum dikonfirmasi. Periksa kotak masuk email Anda.";
   if (m.includes("too many requests"))
     return "Terlalu banyak percobaan. Tunggu beberapa menit lalu coba lagi.";
+  if (m.includes("user not found"))
+    return "Akun dengan email ini tidak ditemukan.";
   if (m.includes("network"))
     return "Tidak dapat terhubung. Periksa koneksi internet Anda.";
   return "Terjadi kesalahan. Silakan coba beberapa saat lagi.";
@@ -23,7 +30,7 @@ function Login() {
   const navigate = useNavigate();
 
   /* ── state form ── */
-  const [username,     setUsername]     = useState("");
+  const [email,        setEmail]        = useState("");
   const [password,     setPassword]     = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe,   setRememberMe]   = useState(false);
@@ -31,66 +38,37 @@ function Login() {
   /* ── state UI ── */
   const [loading,      setLoading]      = useState(false);
   const [error,        setError]        = useState("");
-  const [forgotNote,   setForgotNote]   = useState(false);
+  const [forgotSent,   setForgotSent]   = useState(false);
 
   /* ══════════════════════════════
-     LOGIN — cari email dari username
-     lalu signInWithPassword
+     LOGIN EMAIL + PASSWORD
   ══════════════════════════════ */
   async function handleSubmit(e) {
     e.preventDefault();
     setError("");
-    setForgotNote(false);
+    setForgotSent(false);
 
-    const usernameClean = username.trim().toLowerCase();
-
-    if (!usernameClean) {
-      setError("Nama pengguna tidak boleh kosong.");
+    if (!email.trim()) {
+      setError("Email tidak boleh kosong.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError("Format email tidak valid.");
       return;
     }
     if (!password) {
       setError("Kata sandi tidak boleh kosong.");
       return;
     }
+    if (password.length < 6) {
+      setError("Kata sandi minimal 6 karakter.");
+      return;
+    }
 
     setLoading(true);
     try {
-      /* ── Langkah 1: cari email dari tabel profiles ── */
-      const { data: profile, error: lookupError } = await supabase
-        .from("profiles")
-        .select("email, is_active")
-        .eq("username", usernameClean)
-        .maybeSingle();
-
-      if (lookupError) {
-        /* Tunjukkan pesan lebih spesifik untuk membantu debug */
-        const m = lookupError.message?.toLowerCase() ?? "";
-        if (m.includes("column") && m.includes("username")) {
-          setError("Konfigurasi belum selesai: kolom username belum tersedia. Hubungi administrator.");
-        } else if (m.includes("relation") || m.includes("does not exist")) {
-          setError("Konfigurasi belum selesai: tabel profil belum tersedia. Hubungi administrator.");
-        } else if (m.includes("permission") || m.includes("rls") || m.includes("policy")) {
-          setError("Akses ditolak saat mencari akun. Hubungi administrator.");
-        } else {
-          setError(`Gagal mencari akun: ${lookupError.message}`);
-        }
-        return;
-      }
-
-      if (!profile) {
-        /* Username tidak ditemukan — pesan generik agar tidak bocor info */
-        setError("Nama pengguna atau kata sandi salah.");
-        return;
-      }
-
-      if (!profile.is_active) {
-        setError("Akun Anda telah dinonaktifkan. Hubungi administrator.");
-        return;
-      }
-
-      /* ── Langkah 2: login dengan email yang ditemukan ── */
       const { error: authError } = await supabase.auth.signInWithPassword({
-        email: profile.email,
+        email: email.trim(),
         password,
       });
 
@@ -99,7 +77,6 @@ function Login() {
         return;
       }
 
-      /* Login berhasil */
       navigate("/dashboard");
     } catch {
       setError("Terjadi kesalahan jaringan. Silakan coba lagi.");
@@ -110,11 +87,37 @@ function Login() {
 
   /* ══════════════════════════════
      LUPA PASSWORD
-     Karena pengguna tidak tahu emailnya,
-     tampilkan petunjuk menghubungi admin.
   ══════════════════════════════ */
-  function handleForgotPassword() {
-    setForgotNote((v) => !v);
+  async function handleForgotPassword(e) {
+    e.preventDefault();
+    setError("");
+    setForgotSent(false);
+
+    if (!email.trim()) {
+      setError("Isi email terlebih dahulu, lalu klik Lupa Password.");
+      return;
+    }
+    if (!isValidEmail(email)) {
+      setError("Format email tidak valid.");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(
+        email.trim(),
+        { redirectTo: `${window.location.origin}/reset-password` }
+      );
+      if (resetError) {
+        setError(translateError(resetError.message));
+        return;
+      }
+      setForgotSent(true);
+    } catch {
+      setError("Gagal mengirim email. Silakan coba lagi.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   /* ══════════════════════════════
@@ -160,36 +163,26 @@ function Login() {
           </div>
         )}
 
-        {/* Petunjuk lupa password */}
-        {forgotNote && (
-          <div className="login-banner login-banner--info" role="status">
-            <span className="login-banner__icon">ℹ</span>
-            Hubungi administrator untuk mereset kata sandi Anda.
+        {/* Banner sukses reset password */}
+        {forgotSent && (
+          <div className="login-banner login-banner--success" role="status">
+            <span className="login-banner__icon">✓</span>
+            Link reset password telah dikirim ke{" "}
+            <strong>{email}</strong>. Periksa kotak masuk email Anda.
           </div>
         )}
 
         {/* Form login */}
         <form className="login-form" onSubmit={handleSubmit} noValidate>
 
-          {/* Nama Pengguna */}
-          <div className="input-group">
-            <label htmlFor="login-username">Nama Pengguna</label>
-            <div className="login-username-wrap">
-              <span className="login-username-wrap__icon" aria-hidden="true">
-                <User size={17} />
-              </span>
-              <input
-                id="login-username"
-                type="text"
-                placeholder="Masukkan nama pengguna"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                autoComplete="username"
-                autoCapitalize="none"
-                spellCheck="false"
-              />
-            </div>
-          </div>
+          {/* Email */}
+          <InputField
+            label="Email"
+            type="email"
+            placeholder="contoh@email.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
 
           {/* Kata Sandi */}
           <div className="input-group">
@@ -250,6 +243,14 @@ function Login() {
           </PrimaryButton>
 
         </form>
+
+        {/* Link daftar */}
+        <p className="login-card__footer">
+          Belum punya akun?{" "}
+          <Link to="/register" className="login-card__link">
+            Daftar di sini
+          </Link>
+        </p>
 
       </div>
 

@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Welcome from "./pages/Welcome";
 import Login from "./pages/Login";
+import Register from "./pages/Register";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicOnlyRoute from "./components/PublicOnlyRoute";
@@ -11,14 +12,9 @@ import "./App.css";
  *
  *  /            → Welcome      (publik)
  *  /login       → Login        (publik, redirect ke /dashboard jika sudah login)
+ *  /register    → Register     (publik, redirect ke /dashboard jika sudah login)
  *  /dashboard/* → Dashboard    (privat — dilindungi ProtectedRoute)
  *  *            → redirect /   (catch-all)
- *
- * CATATAN KEAMANAN (v3.2):
- *   Route /register telah dinonaktifkan (Opsi A — keputusan C-05).
- *   Pembuatan akun ustadz dilakukan HANYA oleh admin melalui:
- *     Supabase Dashboard → Authentication → Users → Invite User
- *   Atau melalui fitur manajemen akun yang akan dibangun di area admin.
  */
 function App() {
   return (
@@ -36,8 +32,14 @@ function App() {
           }
         />
 
-        {/* /register dinonaktifkan — redirect ke /login */}
-        <Route path="/register" element={<Navigate to="/login" replace />} />
+        <Route
+          path="/register"
+          element={
+            <PublicOnlyRoute>
+              <Register />
+            </PublicOnlyRoute>
+          }
+        />
 
         {/* ── Halaman privat ── */}
         <Route
