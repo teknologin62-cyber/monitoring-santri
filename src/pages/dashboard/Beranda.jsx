@@ -106,12 +106,15 @@ function Beranda() {
               <ClipboardCheck size={28} />
             </div>
             <span className="beranda-menu-card__label">Input Amal Santri</span>
-          </button>          <button type="button" className="beranda-menu-card" disabled>
+          </button>          <button
+            type="button"
+            className="beranda-menu-card"
+            onClick={() => navigate("/dashboard/akhlak")}
+          >
             <div className="beranda-menu-card__icon beranda-menu-card__icon--blue">
               <BookOpen size={28} />
             </div>
             <span className="beranda-menu-card__label">Catatan Akhlak</span>
-            <span className="beranda-menu-card__badge">Segera</span>
           </button>
 
           <button type="button" className="beranda-menu-card" disabled>

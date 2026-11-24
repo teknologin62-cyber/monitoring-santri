@@ -109,8 +109,7 @@ function InputAmal() {
       const { error } = await supabase
         .from("monitoring_amal")
         .upsert(payload, {
-          onConflict:    "ustadz_id,tanggal",
-          ignoreDuplicates: false,
+          onConflict: "ustadz_id,tanggal",
         });
 
       if (error) throw error;
