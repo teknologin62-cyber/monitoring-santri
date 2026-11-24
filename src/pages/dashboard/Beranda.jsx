@@ -128,12 +128,15 @@ function Beranda() {
             <span className="beranda-menu-card__label">Catatan Akademik</span>
           </button>
 
-          <button type="button" className="beranda-menu-card" disabled>
+          <button
+            type="button"
+            className="beranda-menu-card"
+            onClick={() => navigate("/dashboard/raport")}
+          >
             <div className="beranda-menu-card__icon beranda-menu-card__icon--purple">
               <Award size={28} />
             </div>
             <span className="beranda-menu-card__label">Raport Santri</span>
-            <span className="beranda-menu-card__badge">Segera</span>
           </button>
 
         </div>
