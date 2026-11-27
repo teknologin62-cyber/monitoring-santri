@@ -564,3 +564,151 @@
     flex-wrap: nowrap;
   }
 }
+
+/* ══════════════════════════════
+   FILTER SANTRI
+══════════════════════════════ */
+.raport-santri-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.raport-santri-section__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.raport-santri-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--color-text-muted);
+}
+
+.raport-santri-spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary-button);
+  border-radius: 50%;
+  animation: raport-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+/* Grid kartu — scroll horizontal di mobile */
+.raport-santri-grid {
+  display: flex;
+  gap: var(--space-2);
+  overflow-x: auto;
+  padding-bottom: var(--space-1);
+  /* Sembunyikan scrollbar tapi tetap bisa scroll */
+  scrollbar-width: none;
+}
+.raport-santri-grid::-webkit-scrollbar { display: none; }
+
+/* Kartu santri — horizontal compact */
+.raport-santri-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+  padding: var(--space-2) var(--space-3);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s;
+  min-width: 0;
+  max-width: 180px;
+}
+
+.raport-santri-card:hover {
+  border-color: var(--color-mint);
+  background: #F0FDF4;
+}
+
+.raport-santri-card--active {
+  border-color: var(--color-primary-button);
+  background: #ECFDF5;
+}
+
+/* Avatar */
+.raport-santri-card__avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #064E3B, #08734B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.raport-santri-card__avatar--all {
+  background: var(--color-background);
+  border: 1.5px solid var(--color-border);
+  color: var(--color-primary-button);
+}
+
+.raport-santri-card--active .raport-santri-card__avatar {
+  background: linear-gradient(135deg, #064E3B, #34D399);
+}
+
+.raport-santri-card__info {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.raport-santri-card__nama {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.raport-santri-card--active .raport-santri-card__nama {
+  color: var(--color-primary);
+}
+
+.raport-santri-card__kelas {
+  font-size: 10px;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.raport-santri-card__check {
+  color: var(--color-primary-button);
+  flex-shrink: 0;
+  margin-left: var(--space-1);
+}
+
+/* Di tablet — grid dua baris jika banyak santri */
+@media (min-width: 600px) {
+  .raport-santri-grid {
+    flex-wrap: wrap;
+    overflow-x: visible;
+  }
+  .raport-santri-card {
+    flex-shrink: initial;
+    max-width: 200px;
+  }
+}
