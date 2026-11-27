@@ -1,25 +1,35 @@
+import { useState, useEffect } from "react";
 import { BookOpen, Users, ClipboardCheck, Award } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import { supabase } from "../../lib/supabaseClient";
 import useAuth from "../../hooks/useAuth";
 import "./Beranda.css";
 
-/**
- * Beranda — tab utama dashboard.
- *
- * Tahap 1: menampilkan sapaan kontekstual dan grid menu aksi cepat.
- * Kartu statistik akan diisi data nyata setelah tabel Supabase dibuat (Tahap 2).
- */
 function Beranda() {
-  const navigate    = useNavigate();
-  const { fullName, role } = useAuth();
-  const displayName = fullName || "Pengguna";
+  const navigate             = useNavigate();
+  const { user, fullName, role } = useAuth();
+  const displayName          = fullName || "Pengguna";
 
-  /* Label role untuk ditampilkan */
   const roleLabel = role === "admin"
     ? "Administrator"
     : role === "ustadz"
     ? "Ustadz / Ustadzah"
     : "Pengguna";
+
+  /* ── Ambil jumlah santri yang diasuh ── */
+  const [totalSantri, setTotalSantri] = useState(null); // null = sedang loading
+
+  useEffect(() => {
+    if (!user?.id) return;
+    supabase
+      .from("santri_diasuh")
+      .select("id", { count: "exact", head: true })
+      .eq("ustadz_id", user.id)
+      .then(({ count, error }) => {
+        if (!error) setTotalSantri(count ?? 0);
+        /* Jika tabel belum ada, biarkan null — ditampilkan sebagai "—" */
+      });
+  }, [user?.id]);
 
   return (
     <div className="beranda-root">
@@ -54,7 +64,9 @@ function Beranda() {
               <Users size={20} />
             </div>
             <div>
-              <p className="beranda-stat-card__value">—</p>
+              <p className="beranda-stat-card__value">
+                {totalSantri === null ? "…" : totalSantri}
+              </p>
               <p className="beranda-stat-card__label">Total Santri</p>
             </div>
           </div>
