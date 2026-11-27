@@ -384,3 +384,160 @@
     grid-template-columns: repeat(4, 1fr);
   }
 }
+
+/* ══════════════════════════════
+   PILIH SANTRI
+══════════════════════════════ */
+.akhlak-santri-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.akhlak-santri-section__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+.akhlak-santri-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: var(--space-2) 0;
+}
+
+.akhlak-spinner-sm {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary-button);
+  border-radius: 50%;
+  animation: akhlak-spin 0.65s linear infinite;
+  flex-shrink: 0;
+}
+
+.akhlak-santri-empty {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-card);
+}
+
+.akhlak-santri-empty__link {
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Grid kartu santri */
+.akhlak-santri-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.akhlak-santri-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.akhlak-santri-card:hover {
+  border-color: var(--color-mint);
+  background: #F0FDF4;
+}
+
+.akhlak-santri-card--active {
+  border-color: var(--color-primary-button);
+  background: #ECFDF5;
+  box-shadow: 0 0 0 1px var(--color-primary-button);
+}
+
+.akhlak-santri-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #064E3B, #08734B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.akhlak-santri-card--active .akhlak-santri-card__avatar {
+  background: linear-gradient(135deg, #064E3B, #34D399);
+}
+
+.akhlak-santri-card__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.akhlak-santri-card__nama {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.akhlak-santri-card--active .akhlak-santri-card__nama {
+  color: var(--color-primary);
+}
+
+.akhlak-santri-card__kelas {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+.akhlak-santri-card__check {
+  color: var(--color-primary-button);
+  flex-shrink: 0;
+}
+
+@media (min-width: 480px) {
+  .akhlak-santri-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+}
+
+@media (min-width: 640px) {
+  .akhlak-santri-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
