@@ -373,3 +373,166 @@
     font-size: 17px;
   }
 }
+
+/* ══════════════════════════════
+   PILIH SANTRI
+══════════════════════════════ */
+.amal-santri-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.amal-santri-section__title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin: 0;
+}
+
+/* Loading inline */
+.amal-santri-loading {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: var(--space-2) 0;
+}
+
+/* Spinner variant kecil dan gelap */
+.amal-spinner--sm {
+  width: 14px;
+  height: 14px;
+}
+.amal-spinner--dark {
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-primary-button);
+}
+
+/* Empty state santri */
+.amal-santri-empty {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  padding: var(--space-4) var(--space-5);
+  box-shadow: var(--shadow-card);
+}
+
+.amal-santri-empty__link {
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 700;
+  color: var(--color-primary-button);
+  cursor: pointer;
+  padding: 0;
+  text-decoration: underline;
+}
+
+/* Grid kartu santri — 1 kolom mobile, 2 kolom tablet+ */
+.amal-santri-grid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/* Kartu per santri */
+.amal-santri-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: var(--color-surface);
+  border: 2px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  font: inherit;
+  cursor: pointer;
+  text-align: left;
+  transition: border-color 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.amal-santri-card:hover {
+  border-color: var(--color-mint);
+  background: #F0FDF4;
+}
+
+/* State aktif / terpilih */
+.amal-santri-card--active {
+  border-color: var(--color-primary-button);
+  background: #ECFDF5;
+  box-shadow: 0 0 0 1px var(--color-primary-button);
+}
+
+/* Avatar inisial */
+.amal-santri-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #064E3B, #08734B);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  font-weight: 800;
+  color: #fff;
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.amal-santri-card--active .amal-santri-card__avatar {
+  background: linear-gradient(135deg, #064E3B, #34D399);
+}
+
+.amal-santri-card__info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.amal-santri-card__nama {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--color-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color 0.15s;
+}
+
+.amal-santri-card--active .amal-santri-card__nama {
+  color: var(--color-primary);
+}
+
+.amal-santri-card__kelas {
+  font-size: 11px;
+  color: var(--color-text-muted);
+}
+
+/* Ikon centang di kanan kartu terpilih */
+.amal-santri-card__check {
+  color: var(--color-primary-button);
+  flex-shrink: 0;
+}
+
+/* ── Responsive ── */
+@media (min-width: 480px) {
+  .amal-santri-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-2);
+  }
+}
+
+@media (min-width: 640px) {
+  .amal-santri-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
